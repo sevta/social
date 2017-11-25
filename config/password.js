@@ -5,9 +5,7 @@ module.exports = {
       return bcrypt.hashSync(userpassword , 10)
    },
 
-   check: function(userpassword , hashpasword , cb) {
-      return bcrypt.compare(userpassword , hashpasword).then(
-         cb()
-      )
+   check: function(userpassword , hashpasword) {
+      return bcrypt.compareSync(userpassword , hashpasword)
    }
 }

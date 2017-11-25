@@ -1,11 +1,13 @@
-var express =  require('express')
+var express = require('express')
 var router = express.Router()
+var socialController = require('../controller/socialController')
+var jwt = require('jsonwebtoken')
 var Users = require('../models/users')
-var Seeder = require('../seeder')
-var userController = require('../controller/userController')
-
-router.get('/' , (req , res) => {res.send('hay test ya')})
-router.post('/register' , userController.register)
-router.post('/login' , userController.login)
+var checkAuth = require('../config/checkAuth')
+ 
+router.get('/' , checkAuth.check , (req , res , next) => {
+   const user = req.user
+   res.send({messgae: 'bleh' , user: user})
+})
 
 module.exports = router

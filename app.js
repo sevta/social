@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sassMiddleware = require('node-sass-middleware');
+var jwt = require('jsonwebtoken');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./routes/auth');
 var social = require('./routes/social');
 
 var app = express();
@@ -16,7 +18,7 @@ var validator = require('express-validator');
 
 // 
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/social' ,{ userMongoClient: true } )
+mongoose.connect('mongodb://sevta:dasartai1@ds119406.mlab.com:19406/react-social' ,{ userMongoClient: true } )
 mongoose.Promise = global.Promise
 
 // view engine setup
@@ -46,6 +48,7 @@ app.use((req , res , next) => {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/auth' , auth);
 app.use('/social' , social);
 
 // catch 404 and forward to error handler
